@@ -1,8 +1,8 @@
 # Designer-to-Dev Handoff
 
-**Precise specs, redlines, and docs that eliminate guesswork at the design-to-code boundary.** — built in-house by [Skill&nbsp;Me](https://skillme.dev).
+**For designers handing off to engineers: specs so precise the build matches the design.** — built in-house by [Skill&nbsp;Me](https://skillme.dev).
 
-Five skills covering every stage of the design handoff process — from writing airtight spec documents and redline annotations to defining motion, responsive behavior, and QA checklists. Reduces back-and-forth and ships designs that match intent.
+Reach for this when you're handing a design to engineering and you're tired of the build coming back wrong. It gives you the full handoff toolkit — a single source-of-truth handoff doc, precise redline annotations, and dedicated specs for motion and responsive behavior — plus a QA checklist to verify the implementation before sign-off. The result: fewer Slack round-trips, no guesswork at the design-to-code boundary, and shipped UI that matches intent.
 
 ⭐ **If this is useful, star the repo** — it's how we gauge what to build next.
 
