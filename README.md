@@ -14,14 +14,14 @@ Reach for this when you're handing a design to engineering and you're tired of t
 
 ## Skills in this pack
 
-- **[Design QA Checklist](skills/design-qa-checklist/SKILL.md)** — QA an implemented UI against the design spec — spacing, interactive states, typography, color tokens, and responsiveness.
-- **[Redline Annotation](skills/redline-annotation/SKILL.md)** — Produce precise redline and spec annotations — spacing, sizes, behavior notes — that engineers can build from without guessing.
-- **[Motion Spec](skills/motion-spec/SKILL.md)** — Specify animation and motion precisely — duration, easing, trigger, and intent — so engineers implement exactly what was designed.
-- **[Responsive Spec](skills/responsive-spec/SKILL.md)** — Specify responsive behavior across breakpoints — reflow rules, content priority, touch targets, and layout logic.
-- **[Design Handoff Doc](skills/design-handoff-doc/SKILL.md)** — Write a complete design handoff document covering components, tokens, states, and edge cases.
-- **[Prototype Spec](skills/prototype-spec/SKILL.md)** — Writes detailed prototype specs: interactions, transitions, states, and edge cases.
-- **[Component API Design](aouellets)** — Designs React/Vue component APIs — props, composition, event handling, accessibility. _(external — see source)_
-- **[Color Accessibility](skills/color-accessibility/SKILL.md)** — WCAG 2.2 contrast compliance, accessible palettes, and color choices that survive color blindness.
+- **[Design QA Checklist](skills/design-qa-checklist/SKILL.md)** — Runs an ordered design QA pass over an implemented UI — layout, type, color, states, motion, content — against the design spec, with concrete tolerances and a filed defect list.
+- **[Redline Annotation](skills/redline-annotation/SKILL.md)** — Produces precise redline annotations — spacing, sizing, type, color, radius, z-order, and behavior notes in a consistent, scannable notation — that engineers can build from without asking questions.
+- **[Motion Spec](skills/motion-spec/SKILL.md)** — Specifies animation and motion precisely — duration, easing curve, trigger, and intent — for accurate engineer implementation.
+- **[Responsive Spec](skills/responsive-spec/SKILL.md)** — Specifies responsive behavior across breakpoints — layout reflow, content priority, touch targets, and fluid-versus-stepped scaling rules — precisely enough for engineers to implement directly.
+- **[Design Handoff Doc](skills/design-handoff-doc/SKILL.md)** — Writes a complete design handoff document covering components, design tokens, interaction states, and edge cases for engineering implementation.
+- **[Prototype Spec](skills/prototype-spec/SKILL.md)** — Turns a static design into a numbered, testable, dev-ready specification covering every state, interaction, breakpoint, motion detail, and edge case the mockup cannot show.
+- **[Component API Design](https://skillme.dev/skill/component-api-design)** — Designs React/Vue component APIs — props, composition, event handling, accessibility. _(external — see source)_
+- **[Color Accessibility](skills/color-accessibility/SKILL.md)** — Audits and repairs color palettes against WCAG contrast thresholds — 4.5:1 for body text, 3:1 for large text and UI components, 7:1 for AAA — and makes them safe for color-blind users, delivering a verified pairing table.
 
 ## License
 

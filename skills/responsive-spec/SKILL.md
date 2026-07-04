@@ -1,56 +1,101 @@
 ---
 name: Responsive Spec
-description: Specifies responsive behavior across breakpoints — reflow, content priority, and touch targets — engineers can implement directly. Use when designing adaptive layouts for multi-device products.
+description: Specifies responsive behavior across breakpoints — layout reflow, content priority, touch targets, and fluid-versus-stepped scaling rules — precisely enough for engineers to implement directly. Use when someone asks "how should this work on mobile", "spec the breakpoints", "write the responsive rules for this page", or is adapting a single-viewport design for multi-device use. Do NOT use for static measurements inside one frame — use redline-annotation instead; for the overall handoff package with flows and edge cases, use design-handoff-doc.
 ---
 
 # Responsive Spec
 
-A static design at one viewport does not specify a responsive product. A responsive spec documents the rules that govern how layout, content, and interaction change as the viewport changes — not just a set of static frames.
+A static design at one viewport does not specify a responsive product. The costly failure is handing engineers a desktop frame and a mobile frame with nothing in between: every width between 768px and 1024px becomes an improvisation, and the improvised versions are the ones users actually see. A responsive spec documents the rules that govern how layout, content, and interaction change as the viewport changes.
 
-## Breakpoint Definitions
+## Operating procedure
 
-State the breakpoints explicitly with pixel values and their semantic name:
-- 'mobile': 0-767px
-- 'tablet': 768-1023px
-- 'desktop': 1024-1439px
-- 'wide': 1440px and above
+### Step 1: Gather inputs
 
-If the product uses a different grid system (e.g. a 5-breakpoint Tailwind config), match those values exactly. Never use vague names like 'small' without a pixel value.
+- The existing breakpoint or grid system, if any. If the codebase uses a Tailwind config or similar, match those pixel values exactly — never introduce a parallel system.
+- Device analytics: which viewport widths carry real traffic. Label guesses as guesses.
+- Minimum supported width (default 320px) and whether touch, pointer, or both are in scope.
+- The frames or pages being specified, and whether a token/component system already encodes any behavior.
 
-## Layout Changes Per Breakpoint
+### Step 2: Define breakpoints explicitly
 
-For each breakpoint transition, document:
-- Column count and gutter width.
-- Which elements stack, collapse, or disappear.
-- Container max-width and horizontal padding.
-- Any changes to element ordering (e.g. 'CTA moves above image on mobile').
+State every breakpoint with pixel values and a semantic name. Default convention when the product has none:
 
-An explicit table works well: rows are breakpoints, columns are layout properties.
+- mobile: 0-767px
+- tablet: 768-1023px
+- desktop: 1024-1439px
+- wide: 1440px and above
 
-## Content Priority
+Never use vague names like "small" without a pixel value.
 
-On mobile, not all content fits without compromising usability. Document:
-- Which elements are hidden below a breakpoint and the rationale (progressive disclosure, not arbitrary omission).
-- Which elements change behavior instead of disappearing (e.g. 'horizontal tabs become a select dropdown below 768px').
-- Text truncation rules that apply only on mobile.
-- Navigation patterns: desktop nav bar becomes bottom tab bar or hamburger menu — specify which and at what breakpoint.
+### Step 3: Document layout per breakpoint
 
-## Touch Targets
+For each breakpoint, record: column count and gutter width; container max-width and horizontal padding; which elements stack, collapse, or disappear; and any ordering changes (e.g. "CTA moves above image on mobile") — flag when visual order diverges from DOM order, because that has accessibility consequences. A table with breakpoints as rows and layout properties as columns works well.
 
-All interactive elements on touch viewports must meet minimum target size:
-- Minimum 44x44px for any tappable element. If the visual size is smaller, add invisible padding.
-- Spacing between adjacent touch targets: minimum 8px to prevent mis-taps.
-- Swipe gestures: document direction, threshold, and what action they trigger. Note if swipe conflicts with system gestures (e.g. back swipe on iOS).
+### Step 4: Decide fluid versus stepped, per element
 
-## Fluid vs. Fixed Behavior
+Apply these decision rules instead of choosing by feel:
 
-For every significant element, specify whether it scales fluidly between breakpoints or snaps at discrete points:
-- 'Fluid': element width is a percentage; font size uses clamp() or viewport units.
-- 'Fixed': element width locks to a pixel value at each breakpoint and snaps.
-- Images: specify object-fit (cover vs. contain), aspect ratio at each breakpoint, and whether focal point shifts.
+- Structural properties — column count, element order, show/hide, navigation pattern — are always stepped: they change at a breakpoint, never continuously.
+- Continuous properties — type size, spacing, media height, container width — go fluid (percentage widths, clamp(), viewport units) when they would otherwise need three or more discrete values across the range; keep them stepped when one or two values suffice.
+- Touch-target sizes are never fluid.
+- Images: specify object-fit (cover vs. contain), aspect ratio at each breakpoint, and whether the focal point shifts.
 
-## Edge Cases to Specify
+### Step 5: Set content priority
 
-- Landscape phone orientation: is the layout treated as mobile or tablet?
-- Very long text strings in labels and headings: does the layout break? What is the overflow rule?
-- 320px minimum: the spec must remain functional at the minimum supported width — verify this explicitly.
+On mobile, not everything fits. Document: which elements hide below a breakpoint and the rationale (progressive disclosure, never arbitrary omission); which elements change behavior instead of disappearing (e.g. "horizontal tabs become a select dropdown below 768px"); mobile-only truncation rules; and the navigation pattern swap — desktop nav bar to hamburger or bottom tab bar — with the exact breakpoint where it happens.
+
+### Step 6: Specify touch targets and gestures
+
+- Minimum 44x44px for any tappable element; if the visual size is smaller, add invisible padding.
+- Minimum 8px between adjacent touch targets to prevent mis-taps.
+- Swipe gestures: direction, threshold, triggered action, and conflicts with system gestures (e.g. iOS back swipe).
+
+### Step 7: Verify edge cases
+
+- Landscape phone orientation: state whether it is treated as mobile or tablet.
+- Very long strings in labels and headings: define the overflow rule so the layout cannot break.
+- 320px: confirm the spec remains functional at the minimum supported width — check it explicitly, not by assumption.
+
+## Worked example
+
+```
+RESPONSIVE SPEC — Pricing page
+
+Breakpoint  Range        Cols  Gutter  Container          Nav
+mobile      0-767px      4     16px    fluid, 16px pad    Hamburger
+tablet      768-1023px   8     24px    fluid, 24px pad    Hamburger
+desktop     1024-1439px  12    24px    960px max          Horizontal bar
+wide        1440px+      12    32px    1200px max         Horizontal bar
+
+Element rules
+- Pricing cards: 3-across desktop+, 2-across tablet, stacked mobile.
+  Recommended plan moves first on mobile (visual order != DOM order — noted).
+- Hero heading: fluid, clamp(32px, 5vw, 61px).  [3+ values needed -> fluid]
+- CTA button: 240px fixed on desktop+; full-width mobile.  [2 values -> stepped]
+- Comparison table: horizontal scroll below 768px, first column sticky.
+- FAQ accordion: unchanged at all widths (no rule needed).
+
+Touch: all targets >=44x44px with >=8px gaps, verified at 375px and 320px.
+Landscape phones: treated as mobile. Long plan names: truncate at 2 lines.
+```
+
+## Deliverable
+
+Produce a responsive specification containing: the breakpoint table with pixel values, the per-breakpoint layout table, a fluid-vs-stepped ruling for every significant element, content-priority and navigation-swap rules with rationale, touch-target confirmation, and the edge-case rulings (landscape, long strings, 320px).
+
+## Do NOT
+
+- Do not deliver only static frames per breakpoint — the widths between frames are where products break.
+- Do not invent breakpoints when the codebase already has them; two competing systems guarantee drift.
+- Do not hide content on mobile without stating why; arbitrary omission is how mobile users lose features silently.
+- Do not make everything fluid. Fluid structural layout (columns, ordering) is unimplementable; fluid belongs to continuous properties only.
+- Do not skip the 320px check because "nobody uses those phones" — small viewports also appear in split-screen and embedded webviews.
+
+## Quality bar
+
+- Every breakpoint has a pixel range; every significant element has an explicit fluid-or-stepped ruling.
+- Every hidden element has a rationale; every behavior swap names its trigger breakpoint.
+- Touch targets meet 44x44px with 8px separation on all touch viewports.
+- The layout is verified functional at 320px.
+
+Pair with redline-annotation for within-frame measurements and design-handoff-doc for the surrounding handoff package.

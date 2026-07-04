@@ -56,3 +56,24 @@ This section prevents the most implementation bugs. Document:
 ## Acceptance Criteria Alignment
 
 Close the document with a checklist an engineer can use to self-QA before handing back for design review. Each item is a binary pass/fail statement (e.g. 'Empty state illustration renders when zero results are returned'). Limit to 8-12 items focused on design fidelity, not engineering correctness.
+
+## Deliverable
+
+Produce a single handoff document containing all eight sections in order — overview, design file link, component inventory, design tokens, interaction states, edge cases and constraints, out of scope, and open questions — closed by the 8-12 item acceptance checklist. It should be self-sufficient: an engineer with no prior context can implement from it without a walkthrough, and a designer can QA the build against it without re-opening the design file.
+
+## Do NOT
+
+- **Do not link the project root instead of the specific frame.** The engineer opens a file with forty pages and implements the wrong iteration. Link the exact page or frame, and mark superseded explorations as archived.
+- **Do not document only the default state.** "Engineers will figure out hover and error" is how every button ships with no focus ring and every form fails silently. If a state isn't in the doc, assume it won't be built.
+- **Do not paste raw hex values or pixel numbers where a token exists.** Raw values fork the design system at implementation time; every one either maps to a token or is flagged as an accepted exception before the doc ships.
+- **Do not smuggle scope in through the design file.** If a screen appears in the file but not in the doc's component inventory, engineers either build it unplanned or skip it unannounced. The out-of-scope section exists to prevent both.
+- **Do not leave open questions implicit.** An undocumented ambiguity gets resolved by whoever hits it first — usually mid-sprint, usually wrong. Name each open question and who owns the answer.
+- **Do not write the acceptance checklist as vibes.** "Looks polished" is not checkable. Every item must be binary pass/fail, verifiable by someone who didn't design the feature.
+
+## Quality bar
+
+- Every interactive element has all of its applicable states enumerated, not just default.
+- Every color, spacing, and type value maps to a named token or a flagged exception.
+- Empty, error, and long-content behavior is documented for every list, field, and image.
+- Out-of-scope and open-questions sections are present, even if the entry is "none."
+- The acceptance checklist contains only binary pass/fail statements.
