@@ -9,7 +9,7 @@ Reach for this when you're handing a design to engineering and you're tired of t
 ## Install
 
 - **From the catalog:** [skillme.dev/pack/designer-to-dev-handoff](https://skillme.dev/pack/designer-to-dev-handoff) — install the whole pack into Claude in one step.
-- **With the skills CLI:** `npx skills add aouellets/designer-to-dev-handoff`
+- **With the skills CLI:** `npx skills add SkillMedev/designer-to-dev-handoff`
 - **Manually:** copy any `skills/<slug>/SKILL.md` into your Claude skills directory.
 
 ## Skills in this pack
