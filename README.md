@@ -1,16 +1,17 @@
 # Designer-to-Dev Handoff
 
-**For designers handing off to engineers: specs so precise the build matches the design.** — built in-house by [Skill&nbsp;Me](https://skillme.dev).
+**For designers handing off to engineers: specs so precise the build matches the design.** — built in-house by [Skill&nbsp;Me](https://skillme.dev/?utm_source=github&utm_medium=readme&utm_campaign=pack-designer-to-dev-handoff).
 
 Reach for this when you're handing a design to engineering and you're tired of the build coming back wrong. It gives you the full handoff toolkit - a single source-of-truth handoff doc, precise redline annotations, and dedicated specs for motion and responsive behavior - plus a QA checklist to verify the implementation before sign-off. The result: fewer Slack round-trips, no guesswork at the design-to-code boundary, and shipped UI that matches intent.
 
-⭐ **If this is useful, star the repo** — it's how we gauge what to build next.
-
 ## Install
 
-- **From the catalog:** [skillme.dev/pack/designer-to-dev-handoff](https://skillme.dev/pack/designer-to-dev-handoff) — install the whole pack into Claude in one step.
+- **Claude, ChatGPT, Codex, Cursor (connector):** [install the whole pack from skillme.dev](https://skillme.dev/pack/designer-to-dev-handoff?utm_source=github&utm_medium=readme&utm_campaign=pack-designer-to-dev-handoff) — one connection, then ask for any skill by name.
+- **As files for Codex, Cursor, or Claude Code:** `npx @skillme/cli add design-qa-checklist redline-annotation motion-spec responsive-spec design-handoff-doc prototype-spec color-accessibility --target all`
 - **With the skills CLI:** `npx skills add SkillMedev/designer-to-dev-handoff`
-- **Manually:** copy any `skills/<slug>/SKILL.md` into your Claude skills directory.
+- **Manually:** copy any `skills/<slug>/SKILL.md` into `.agents/skills/`, `.cursor/skills/`, or `.claude/skills/`.
+
+⭐ **If this is useful, star the repo** — it's how we gauge what to build next.
 
 ## Skills in this pack
 
@@ -26,4 +27,4 @@ Reach for this when you're handing a design to engineering and you're tired of t
 ## License
 
 MIT — see [LICENSE](LICENSE). Skills are portable `SKILL.md` files; the canonical
-copies live in the [Skill&nbsp;Me catalog](https://skillme.dev).
+copies live in the [Skill&nbsp;Me catalog](https://skillme.dev/browse?utm_source=github&utm_medium=readme&utm_campaign=pack-designer-to-dev-handoff).
